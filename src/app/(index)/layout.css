@@ -1,0 +1,19 @@
+/*
+Esto es un css normal, lo estoy usando para crear
+manualmente los grid area para centrar
+correctamente el header, main y footer
+
+Hacerlo con tailwind era más dificil.
+*/
+body {
+    display: grid;
+    grid-template-areas: "header header header"
+                        "main main main"
+                        "footer footer footer";
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+header { grid-area: header;}
+main { grid-area: main;}
+footer { grid-area: footer;}

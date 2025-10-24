@@ -5,7 +5,7 @@ correctamente el header, main y footer
 
 Hacerlo con tailwind era más dificil.
 */
-body {
+body > div {
     display: grid;
     grid-template-areas: "header header header"
                         "main main main"

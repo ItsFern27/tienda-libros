@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="text-white bg-black">
-      <header>HEADER DE TODAS LAS PAGS</header>
+    <div className="text-black bg-gray-100">
+      <header className="shadow-sm bg-white font-bold text-green-500 py-6">Categoria</header>
       <main className="p-5">{children}</main>
-      <footer>FOOTER DE TODAS LAS PAGS</footer>
+      <footer className="bg-green-600 py-6 ">FOOTER DE TODAS LAS PAGS</footer>
     </div>
   );
 }

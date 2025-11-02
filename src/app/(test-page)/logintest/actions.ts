@@ -32,14 +32,13 @@ export async function signUp(formData: FormData) {
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
-    // options: {
-    //   data: {
-    //     first_name: 'John',
-    //     age: 27,
-    //     display_name: 'etesech200',
-    //     avatar_url: 'https://images7.memedroid.com/images/UPLOADED314/68a60f46100b4.jpeg'
-    //   }
-    // }
+    options: {
+      data: {
+        name: 'Curly X',
+        user_name: 'curly333',
+        avatar_url: 'https://images7.memedroid.com/images/UPLOADED314/68a60f46100b4.jpeg' //https://static.wikia.nocookie.net/youtubepedia/images/8/8e/Curly.jpeg/revision/latest?cb=20200109025702&path-prefix=es
+      }
+    }
   }
 
   const { error } = await supabase.auth.signUp(data)

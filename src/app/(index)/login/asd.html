@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .demo-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+</head>
+
+<body class="h-full gradient-bg font-sans">
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8"><!-- Logo/Icon -->
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="h-8 w-8 text-indigo-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h2 id="page-title" class="mt-6 text-center text-3xl font-extrabold text-white">Iniciar Sesión</h2>
+                <p id="welcome-message" class="mt-2 text-center text-sm text-indigo-100">Bienvenido de vuelta</p>
+            </div><!-- Login Form (Demo) -->
+            <div class="glass-effect rounded-xl p-8 shadow-2xl">
+                <form class="space-y-6" onsubmit="handleDemoSubmit(event)">
+                    <div><label for="email" class="block text-sm font-medium text-white mb-2"> Correo electrónico
+                        </label>
+                        <div class="relative"><input id="email" name="email" type="email"
+                                class="demo-input appearance-none rounded-lg relative block w-full px-4 py-3 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 text-sm"
+                                placeholder="tu@ejemplo.com" value="demo@ejemplo.com" readonly>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div><label for="password" class="block text-sm font-medium text-white mb-2"> Contraseña </label>
+                        <div class="relative"><input id="password" name="password" type="password"
+                                class="demo-input appearance-none rounded-lg relative block w-full px-4 py-3 placeholder-gray-500 text-gray-900 focus:outline-none focus:z-10 text-sm"
+                                placeholder="••••••••" value="demo123" readonly>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center"><input id="remember-me" name="remember-me" type="checkbox"
+                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"> <label
+                                for="remember-me" class="ml-2 block text-sm text-white"> Recordarme </label>
+                        </div>
+                        <div class="text-sm"><a href="#" id="forgot-link"
+                                class="font-medium text-indigo-200 hover:text-white transition-colors duration-200">
+                                ¿Olvidaste tu contraseña? </a>
+                        </div>
+                    </div>
+                    <div><button id="login-button" type="submit"
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg hover:shadow-xl">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" fill="none"
+                                    stroke="currentColor" viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                                    </path>
+                                </svg></span> <span id="login-button-text">Iniciar Sesión</span> </button>
+                    </div><!-- Demo Notice -->
+                    <div class="mt-6 p-3 bg-yellow-100 border border-yellow-300 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-yellow-400" fill="none" stroke="currentColor"
+                                    viewbox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-800"><strong>Demo:</strong> Esta es una página de
+                                    demostración visual. Los campos no son funcionales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- Additional Links -->
+            <div class="text-center">
+                <p class="text-sm text-indigo-100">¿No tienes una cuenta? <a href="#"
+                        class="font-medium text-white hover:text-indigo-200 transition-colors duration-200"> Regístrate
+                        aquí </a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Configuration object
+        const defaultConfig = {
+            page_title: "Iniciar Sesión",
+            welcome_message: "Bienvenido de vuelta",
+            login_button_text: "Iniciar Sesión",
+            forgot_link_text: "¿Olvidaste tu contraseña?",
+            background_color: "#667eea",
+            surface_color: "#ffffff",
+            text_color: "#ffffff",
+            primary_action_color: "#4f46e5",
+            secondary_action_color: "#a5b4fc"
+        };
+
+        // Handle demo form submission
+        function handleDemoSubmit(event) {
+            event.preventDefault();
+
+            const button = document.getElementById('login-button');
+            const buttonText = document.getElementById('login-button-text');
+            const originalText = buttonText.textContent;
+
+            // Show loading state
+            button.disabled = true;
+            button.classList.add('opacity-75');
+            buttonText.textContent = 'Iniciando...';
+
+            // Simulate login process
+            setTimeout(() => {
+                // Show success message
+                showMessage('¡Demo completada! Esta es solo una demostración visual.', 'success');
+
+                // Reset button
+                button.disabled = false;
+                button.classList.remove('opacity-75');
+                buttonText.textContent = originalText;
+            }, 2000);
+        }
+
+        // Show message function
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                }`;
+            messageDiv.textContent = message;
+
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 4000);
+        }
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            const pageTitle = document.getElementById('page-title');
+            const welcomeMessage = document.getElementById('welcome-message');
+            const loginButtonText = document.getElementById('login-button-text');
+            const forgotLink = document.getElementById('forgot-link');
+
+            if (pageTitle) {
+                pageTitle.textContent = config.page_title || defaultConfig.page_title;
+            }
+            if (welcomeMessage) {
+                welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
+            }
+            if (loginButtonText) {
+                loginButtonText.textContent = config.login_button_text || defaultConfig.login_button_text;
+            }
+            if (forgotLink) {
+                forgotLink.textContent = config.forgot_link_text || defaultConfig.forgot_link_text;
+            }
+
+            // Apply colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #764ba2 100%)`;
+
+            const loginButton = document.getElementById('login-button');
+            if (loginButton) {
+                loginButton.style.backgroundColor = primaryActionColor;
+            }
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_color || defaultConfig.background_color,
+                            set: (value) => {
+                                config.background_color = value;
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.surface_color || defaultConfig.surface_color,
+                            set: (value) => {
+                                config.surface_color = value;
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                            set: (value) => {
+                                config.primary_action_color = value;
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                            set: (value) => {
+                                config.secondary_action_color = value;
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || 'Inter',
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: {
+                        get: () => config.font_size || 16,
+                        set: (value) => {
+                            config.font_size = value;
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["page_title", config.page_title || defaultConfig.page_title],
+                    ["welcome_message", config.welcome_message || defaultConfig.welcome_message],
+                    ["login_button_text", config.login_button_text || defaultConfig.login_button_text],
+                    ["forgot_link_text", config.forgot_link_text || defaultConfig.forgot_link_text]
+                ])
+            });
+        }
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'99863d666333b53c',t:'MTc2MjExMzg1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

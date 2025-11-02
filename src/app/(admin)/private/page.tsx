@@ -8,8 +8,8 @@ export default async function PrivatePage() {
 
   const { data, error } = await supabase.auth.getUser()
   if (error || !data?.user) {
-    redirect('/login')
+    redirect('/logintest')
   }
 
-  return <p>Hello {data.user.email} {data.user.user_metadata.display_name} <img src={data.user.user_metadata.avatar_url} alt="asd"/></p>
+  return <p>Hello {data.user.email} {data.user.user_metadata.display_name} <img src={data.user.user_metadata.avatar_url} alt="asd" /></p>
 }

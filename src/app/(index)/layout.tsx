@@ -1,3 +1,4 @@
+
 /*
 Aqui se inician el header, main(children) y el footer, otorgandole un estilo css
 por separado de tailwind para hacer el grid de los elemmentos iniciales del body

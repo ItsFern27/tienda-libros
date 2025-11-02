@@ -1,0 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
+
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
+
+export default async function PrivatePage() {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/login')
+  }
+
+  return <p>Hello {data.user.email} {data.user.user_metadata.display_name} <img src={data.user.user_metadata.avatar_url} alt="asd"/></p>
+}

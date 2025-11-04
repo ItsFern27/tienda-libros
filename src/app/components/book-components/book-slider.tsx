@@ -12,7 +12,11 @@ interface Libro {
     portada: string;
 }
 
-export function BookSlider() {
+interface BookSliderProps {
+    categoriaNombre?: string;
+}
+
+export function BookSlider({ categoriaNombre }: BookSliderProps) {
     const [libros, setLibros] = useState<Libro[]>([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,12 +28,34 @@ export function BookSlider() {
     useEffect(() => {
         const fetchLibros = async () => {
             const supabase = createClient();
-            const { data } = await supabase.from('libro').select('*').limit(11);
+            let query = supabase.from('libro').select('*');
+            
+            // Si se proporciona un nombre de categoría, filtrar por esa categoría
+            if (categoriaNombre) {
+                // Primero obtener el ID de la categoría por su nombre
+                const { data: categoriaData } = await supabase
+                    .from('categoria')
+                    .select('id')
+                    .eq('nombre', categoriaNombre)
+                    .single();
+                
+                if (categoriaData) {
+                    // Filtrar libros por categoria_id
+                    query = query.eq('categoria_id', categoriaData.id);
+                } else {
+                    // Si no se encuentra la categoría, no mostrar libros
+                    setLibros([]);
+                    setLoading(false);
+                    return;
+                }
+            }
+            
+            const { data } = await query.limit(11);
             setLibros(data || []);
             setLoading(false);
         };
         fetchLibros();
-    }, []);
+    }, [categoriaNombre]);
 
     // Calcular cuántos elementos mostrar y el gap según el tamaño del slider
     useEffect(() => {

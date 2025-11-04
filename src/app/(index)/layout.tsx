@@ -9,8 +9,7 @@ editar lo que se muestra en cada pagina
 Se retrna un div pq en e ayut raiz siempre debe estar e
 htm y bdy
 */
-import "./layout.css"
-import { Header } from "../components/header/header";
+import "./layout.css";
 
 export default function RootLayout({
   children,
@@ -18,10 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <Header/>
-      <main className="p-5">{children}</main>
-      <footer className="bg-green-600 py-6 ">FOOTER DE TODAS LAS PAGS</footer>
-    </div>
+    <main className="p-5">
+      {children}
+    </main>
   );
 }

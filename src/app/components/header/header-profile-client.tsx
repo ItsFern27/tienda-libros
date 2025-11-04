@@ -74,8 +74,8 @@ export default function ProfileMenu({ user }: Readonly<{ user: any }>) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className={`absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 transition-all z-50 ${open ? 'block' : 'hidden'}`}>
-        <Link role="menuitem" href="/user/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mis Pedidos</Link>
-        <Link role="menuitem" href="/user/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configuración</Link>
+        <Link role="menuitem" href="/pedidos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mis Pedidos</Link>
+        <Link role="menuitem" href="/configuración" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configuración</Link>
         <hr className="my-1 border-gray-200" />
         <form action="/auth/signout" method="post" className="block">
           <button role="menuitem" type="submit" className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Cerrar Sesión</button>

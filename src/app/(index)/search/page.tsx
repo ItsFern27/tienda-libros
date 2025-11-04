@@ -8,13 +8,22 @@ osea el del main del layout de: app > layout.tsx
 (ahora mismo estamos en app > search > page.tsx)
 */
 
-import Link from 'next/link'
+import { SearchResults } from "@/app/components/search/search-results";
 
-export default function Home() {
+interface SearchPageProps {
+  searchParams: Promise<{ q?: string }> | { q?: string };
+}
+
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+  const params = searchParams instanceof Promise ? await searchParams : searchParams;
+  const searchQuery = params?.q || "";
+  
+  console.log('SearchPage - searchParams:', params);
+  console.log('SearchPage - searchQuery:', searchQuery);
+
   return (
-    <div className='flex flex-col items-start'> {/* borrar items-start para comportamiento normal de flex */}
-      <h1>search</h1>
-      <Link href="/" className='bg-purple-700'>link a main</Link>
+    <div className="container mx-auto px-6 py-8">
+      <SearchResults searchQuery={searchQuery} />
     </div>
   );
 }

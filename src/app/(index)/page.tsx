@@ -14,8 +14,8 @@ export default async function Home() {
 
       <section className='flex flex-col gap-10 mx-auto my-8'>
         <BookSection title='Destacados'/>
-        <BookSection title='Juvenil' categoriaNombre='Romance'/>
-        <BookSection title='Ficción' categoriaNombre='Ficcion'/>
+        <BookSection title='Romance' categoriaNombre='Romance'/>
+        <BookSection title='Juvenil' categoriaNombre='Juvenil'/>
       </section>
     </div>
   );

@@ -50,7 +50,7 @@ export function BookSlider({ categoriaNombre }: BookSliderProps) {
                 }
             }
             
-            const { data } = await query.limit(11);
+            const { data } = await query.limit(10);
             setLibros(data || []);
             setLoading(false);
         };

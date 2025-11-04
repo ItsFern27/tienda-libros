@@ -6,11 +6,10 @@ interface StoreInfo {
   phone: string;
   email: string;
   schedule: string[];
+  imageUrl: string;
 }
 
 export function StoresList() {
-  const imageUrl = 'https://cdeyc.com/wp-content/uploads/2024/11/boo-1024x683.jpg';
-
   const stores: StoreInfo[] = [
     {
       name: 'Librería Diagonal',
@@ -18,10 +17,11 @@ export function StoresList() {
       phone: '01242-2798/993516845',
       email: 'diagonal@ibero.com.pe',
       schedule: [
-        'Domingo: 10:00 am - 09:00 pm',
         'Lunes a Jueves: 09:00 am-09:00 pm',
-        'Viernes a Sábado: 09:00 am - 10:00 pm'
-      ]
+        'Viernes a Sábado: 09:00 am - 10:00 pm',
+        'Domingo: 10:00 am - 09:00 pm'
+      ],
+      imageUrl: 'https://cdeyc.com/wp-content/uploads/2024/11/boo-1024x683.jpg'
     },
     {
       name: 'Librería Larco',
@@ -29,9 +29,10 @@ export function StoresList() {
       phone: '01445-5520/993513516',
       email: 'Marco@ibero.com.pe',
       schedule: [
-        'Domingo: 10:00 am-09:00 pm',
-        'Lunes a Sábado: 09:00 am - 10:00 pm'
-      ]
+        'Lunes a Sábado: 09:00 am - 10:00 pm',
+        'Domingo: 10:00 am-09:00 pm'
+      ],
+      imageUrl: 'https://i.blogs.es/d65aaa/akiracomics_2/1366_2000.jpg'
     },
     {
       name: 'Librería Centro',
@@ -39,10 +40,11 @@ export function StoresList() {
       phone: '01242-2798/935162657',
       email: 'diagonal@ibero.com.pe',
       schedule: [
-        'Domingo: 10:00 am - 09:00 pm',
         'Lunes a Jueves: 09:00 am-09:00 pm',
-        'Viernes a Sábado: 09:00 am - 10:00 pm'
-      ]
+        'Viernes a Sábado: 09:00 am - 10:00 pm',
+        'Domingo: 10:00 am - 09:00 pm'
+      ],
+      imageUrl: 'https://connectionsbyfinsa.com/wp-content/uploads/2017/10/studio-arthur-casas-saraiva-bookstore.jpg'
     },
     {
       name: 'Librería San Isidro',
@@ -50,10 +52,11 @@ export function StoresList() {
       phone: '01242-2798/993351657',
       email: 'diagonal@ibero.com.pe',
       schedule: [
-        'Domingo: 10:00 am - 09:00 pm',
         'Lunes a Jueves: 09:00 am-09:00 pm',
-        'Viernes a Sábado: 09:00 am - 10:00 pm'
-      ]
+        'Viernes a Sábado: 09:00 am - 10:00 pm',
+        'Domingo: 10:00 am - 09:00 pm'
+      ],
+      imageUrl: 'https://f.rpp-noticias.io/2023/04/21/1418542000532856wjpg.jpg'
     }
   ];
 
@@ -61,7 +64,7 @@ export function StoresList() {
     <div className='flex justify-center w-full mt-8 mb-8'>
       <div className='grid grid-cols-2 gap-x-15 gap-y-8 max-w-5xl px-4'>
         {stores.map((store, index) => (
-          <StoreCard key={index} storeInfo={store} imageUrl={imageUrl} />
+          <StoreCard key={index} storeInfo={store} imageUrl={store.imageUrl} />
         ))}
       </div>
     </div>

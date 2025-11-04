@@ -188,8 +188,8 @@ export function BookSlider({ categoriaNombre }: BookSliderProps) {
                 <button
                     onClick={goToPrevious}
                     disabled={currentIndex === 0}
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-green-500 ${
-                        currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                    className={`cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                        currentIndex === 0 ? 'opacity-50' : ''
                     }`}
                     aria-label="Anterior"
                 >
@@ -212,8 +212,8 @@ export function BookSlider({ categoriaNombre }: BookSliderProps) {
                 <button
                     onClick={goToNext}
                     disabled={currentIndex >= maxIndex}
-                    className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-green-500 ${
-                        currentIndex >= maxIndex ? 'opacity-50 cursor-not-allowed' : ''
+                    className={`cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                        currentIndex >= maxIndex ? 'opacity-50' : ''
                     }`}
                     aria-label="Siguiente"
                 >

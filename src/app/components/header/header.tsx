@@ -17,7 +17,7 @@ export async function Header() {
                 </div>
 
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
-                    <Link href="/search" className="hover:text-green-600">Categorias</Link>
+                    <Link href="/nosotros" className="hover:text-green-600">Nosotros</Link>
                     <Link href="/stores" className="hover:text-green-600">Tiendas</Link>
                     <SearchForm />
                 </nav>

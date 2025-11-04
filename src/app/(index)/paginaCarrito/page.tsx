@@ -5,17 +5,26 @@ import * as React from "react";
 import LibroInform from "./Carrito/LibroInform";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getCart, updateQuantity, clearCart } from "@/utils/cart";
+import { getCart, updateQuantity, clearCart, type CartItem } from "@/utils/cart";
+import { BookSection } from "@/app/components/book-components/book-section";
 
 interface ICarritoProps {}
 
 const Page: React.FunctionComponent<ICarritoProps> = () => {
   const router = useRouter();
-  const [libros, setLibros] = React.useState(getCart());
+  // Inicializar con array vacío para evitar diferencias servidor/cliente
+  const [libros, setLibros] = React.useState<CartItem[]>([]);
   const [subtotal, setSubtotal] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  // Cargar datos del carrito solo en el cliente después de montar
+  React.useEffect(() => {
+    setIsMounted(true);
+    setLibros(getCart());
+  }, []);
 
   const actualizarCantidad = (idLibro: string, nuevaCantidad: number) => {
     const next = updateQuantity(idLibro, nuevaCantidad);
@@ -23,17 +32,13 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
   };
 
   React.useEffect(() => {
+    if (!isMounted) return;
     const newSubTotal = libros.reduce((acum, libro) => {
       const precioTotalLibro = libro.cantidad * libro.precio;
       return acum + precioTotalLibro;
     }, 0);
     setSubtotal(newSubTotal);
-  }, [libros]);
-
-  React.useEffect(() => {
-    // Sincronizar al cargar la página desde localStorage
-    setLibros(getCart());
-  }, []);
+  }, [libros, isMounted]);
 
   const handleFinalizarCompra = async () => {
     if (libros.length === 0 || subtotal <= 0) {
@@ -79,8 +84,21 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
     }
   };
 
+  // No renderizar hasta que el componente esté montado en el cliente
+  if (!isMounted) {
+    return (
+      <div className="w-full min-h-[80vh] p-[2%5%] flex flex-col gap-10">
+        <span className="">{"Inicio > Carro de Compras"}</span>
+        <h2 className="font-bold text-[2rem]">Mi Carrito de Compras</h2>
+        <div className="flex items-center justify-center py-12">
+          <p className="text-gray-500">Cargando carrito...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full min-h-[80vh] p-[2%5%]">
+    <div className="w-full min-h-[80vh] p-[2%5%] flex flex-col gap-10">
       <span className="">{"Inicio > Carro de Compras"}</span>
       <h2 className="font-bold text-[2rem]">Mi Carrito de Compras</h2>
       <div className="grid grid-cols-[60%40%] justify-items-center">
@@ -91,19 +109,23 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
             <p className="w-[20%]">CANTIDAD</p>
           </div>
           <div className="content-lista-libros flex flex-col gap-4">
-            {libros.map((libro) => {
-              if (libro.cantidad > 0) {
-                return (
-                  <LibroInform
-                    key={libro.id}
-                    onCantidadChange={actualizarCantidad}
-                    {...libro}
-                  />
-                );
-              } else {
-                return;
-              }
-            })}
+            {libros.length === 0 ? (
+              <p className="text-gray-500 py-8 text-center">Tu carrito está vacío</p>
+            ) : (
+              libros.map((libro) => {
+                if (libro.cantidad > 0) {
+                  return (
+                    <LibroInform
+                      key={libro.id}
+                      onCantidadChange={actualizarCantidad}
+                      {...libro}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })
+            )}
           </div>
           <Link className="block w-4/10" href={"/"}>
             Seguir Comprando
@@ -184,10 +206,7 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
           </div>
         </div>
       </div>
-      <div>
-        <Link href="/" className="">RECOMENDACION PARA TI</Link>
-        <div></div>
-      </div>
+      <BookSection title="Recomendados para ti"/>
     </div>
   );
 };

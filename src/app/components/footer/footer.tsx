@@ -12,7 +12,7 @@ export function Footer() {
                 <div>
                     <h4 className="font-semibold text-white mb-2">Enlaces</h4>
                     <ul className="space-y-1">
-                        <li><Link href="/search" className="text-gray-200">Categorias</Link></li>
+                        <li><Link href="/nosotros" className="text-gray-200">Nosotros</Link></li>
                         <li><Link href="/stores" className="text-gray-200">Tiendas</Link></li>
                         <li><Link href="/configuration" className="text-gray-200">Configuración</Link></li>
                     </ul>

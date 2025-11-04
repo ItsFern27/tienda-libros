@@ -1,30 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 "use client";
 import * as React from "react";
 import LibroInform from "./Carrito/LibroInform";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getCart, updateQuantity, clearCart } from "@/utils/cart";
 
 interface ICarritoProps {}
 
-const INITIAL_LIBROS = [
-  { id: "101", img: "/", titulo: "El Principito", precio: 45.0, cantidad: 1 },
-  { id: "102", img: "/", titulo: "Mario Card", precio: 12.0, cantidad: 2 },
-  { id: "103", img: "/", titulo: "Flores", precio: 12.5, cantidad: 3 },
-];
-
 const Page: React.FunctionComponent<ICarritoProps> = () => {
-  const [libros, setLibros] = React.useState(INITIAL_LIBROS);
+  const router = useRouter();
+  const [libros, setLibros] = React.useState(getCart());
   const [subtotal, setSubtotal] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [success, setSuccess] = React.useState(false);
 
   const actualizarCantidad = (idLibro: string, nuevaCantidad: number) => {
-    setLibros((prevLibros) =>
-      prevLibros.map((libro) => {
-        if (libro.id === idLibro) {
-          const cantidadValida = Math.max(0, nuevaCantidad);
-          return { ...libro, cantidad: cantidadValida };
-        }
-        return libro;
-      })
-    );
+    const next = updateQuantity(idLibro, nuevaCantidad);
+    setLibros(next);
   };
 
   React.useEffect(() => {
@@ -34,6 +29,55 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
     }, 0);
     setSubtotal(newSubTotal);
   }, [libros]);
+
+  React.useEffect(() => {
+    // Sincronizar al cargar la página desde localStorage
+    setLibros(getCart());
+  }, []);
+
+  const handleFinalizarCompra = async () => {
+    if (libros.length === 0 || subtotal <= 0) {
+      setError("El carrito está vacío");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch("/api/pedidos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: libros,
+          total: subtotal,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Error al finalizar la compra");
+      }
+
+      // Éxito: limpiar el carrito y mostrar mensaje
+      clearCart();
+      setLibros([]);
+      setSuccess(true);
+
+      // Redirigir a la página de pedidos después de 2 segundos
+      setTimeout(() => {
+        router.push("/pedidos");
+      }, 2000);
+    } catch (e: any) {
+      setError(e.message || "Error al finalizar la compra");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full min-h-[80vh] p-[2%5%]">
@@ -68,6 +112,7 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
             className="block w-4/10 cursor-pointer "
             onClick={() => {
               if (libros.length > 0) {
+                clearCart();
                 setLibros([]);
               }
             }}
@@ -97,9 +142,29 @@ const Page: React.FunctionComponent<ICarritoProps> = () => {
               </span>
             </div>
 
-            <button className="w-full bg-green-600 text-white py-3 rounded-full font-bold hover:bg-green-700 transition duration-300 shadow-md">
-              Finalizar Compra
+            <button
+              onClick={handleFinalizarCompra}
+              disabled={loading || libros.length === 0 || subtotal <= 0}
+              className={`w-full py-3 rounded-full font-bold transition duration-300 shadow-md ${
+                loading || libros.length === 0 || subtotal <= 0
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-green-600 hover:bg-green-700 text-white"
+              }`}
+            >
+              {loading ? "Procesando..." : "Finalizar Compra"}
             </button>
+
+            {error && (
+              <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
+            {success && (
+              <div className="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
+                ¡Compra realizada con éxito! Redirigiendo a tus pedidos...
+              </div>
+            )}
 
             <div className="mt-6 pt-4 border-t border-gray-200">
               <div className="flex justify-between items-center py-2 cursor-pointer hover:bg-gray-50 rounded-md px-2 transition duration-150">

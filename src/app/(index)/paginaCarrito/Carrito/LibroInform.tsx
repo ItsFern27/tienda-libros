@@ -32,7 +32,7 @@ const LibroInform: React.FunctionComponent<ILibroInformProps> = ({
     <div
       className={`w-full h-35 border-[fff] border-solid border-2 flex flex-row`}
     >
-      <img className="w-[30%] h-full" src={img} alt={"Imagen sobre Libro"} />
+      <img className="w-[30%] h-full object-cover" src={img} alt={"Imagen sobre Libro"} />
       <div className="w-[70%] h-full flex flex-row">
         <div className="w-[40%]">
           <p className="text-[1.6rem]">{titulo}</p>

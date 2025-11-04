@@ -1,13 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
 import { createClient } from "@/utils/supabase/server";
 
-export async function BookCard() {
+interface BookCardProps {
+    limit?: number;
+    titulo?: number | string;
+}
+
+export async function BookCard({ limit = 5, titulo }: BookCardProps = {}) {
     const supabase = await createClient();
-    const { data: libros } = await supabase.from('libro').select('*').limit(5);
+    
+    let query = supabase.from('libro').select('*');
+    
+    // Si se especifica un titulo, obtener solo ese libro
+    if (titulo) {
+        query = query.eq('titulo', titulo).limit(1);
+    } else {
+        // Si no hay bookId, usar el límite especificado
+        query = query.limit(limit);
+    }
+    
+    const { data: libros } = await query;
+
+    // Si no hay libros, retornar null o un mensaje
+    if (!libros || libros.length === 0) {
+        return null;
+    }
 
     return (
         <>
-            {libros?.map((libro) => (
+            {libros.map((libro) => (
                 <div
                     key={libro.id}
                     className="max-w-60 w-full flex flex-col cursor-pointer bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-102 transition-[transform, shadow] duration-300"

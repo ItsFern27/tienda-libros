@@ -6,7 +6,6 @@ import { Carousel } from '../components/carousel/carousel';
 import { BookSection } from '../components/book-components/book-section';
 
 export default async function Home() {
-  
 
   return (
     <div className='flex flex-col items-start'> {/* borrar items-start para comportamiento normal de flex */}

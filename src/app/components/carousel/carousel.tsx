@@ -7,9 +7,9 @@ export function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   
   const images = [
-    'https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch/70010000093189/7ca9922741867dc8d55fcf9aabb0c84d4178096a77512a1beadb736288ac98f3',
-    'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3405340/d06cb39a82a703e42541085fc61b42d80904b3f8/header.jpg?t=1760445338',
-    'https://media.gq.com/photos/5a6f97c2cbcadf1e4e15c497/master/pass/monster-hunter-gq.jpg'
+    'https://cdeyc.com/wp-content/uploads/2024/11/boo-1024x683.jpg',
+    'https://i.blogs.es/d65aaa/akiracomics_2/1366_2000.jpg',
+    'https://connectionsbyfinsa.com/wp-content/uploads/2017/10/studio-arthur-casas-saraiva-bookstore.jpg'
   ]
 
   useEffect(() => {

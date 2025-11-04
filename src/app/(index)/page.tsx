@@ -2,7 +2,7 @@
 Aqui se manda el contenido al layout
 */
 import Link from 'next/link'
-import { BookCard } from '../components/card/book';
+import { BookSlider } from '../components/card/book-slider';
 
 export default async function Home() {
   
@@ -14,8 +14,8 @@ export default async function Home() {
       <Link href="/search" className='bg-emerald-700'>link a search</Link>
       <Link href="/configuration" className='bg-blue-700'>link a conf</Link>
 
-      <p>Componente</p>
-      <BookCard/>
+      <h2>Destacados</h2>
+      <BookSlider/>
     </div>
   );
 }

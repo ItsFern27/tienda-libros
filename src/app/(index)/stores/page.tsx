@@ -8,13 +8,8 @@ osea el del main del layout de: app > layout.tsx
 (ahora mismo estamos en app > stores > page.tsx)
 */
 
-import Link from 'next/link'
+import { StoresList } from '../../components/stores/stores-list';
 
 export default function Home() {
-  return (
-    <div className='flex flex-col items-start'> {/* borrar items-start para comportamiento normal de flex */}
-      <h1>stores</h1>
-      <Link href="/" className='bg-purple-700'>link a main</Link>
-    </div>
-  );
+  return <StoresList />;
 }

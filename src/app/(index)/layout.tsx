@@ -17,8 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="p-5">
-      {children}
-    </main>
+    <div>
+      <Header/>
+      <main>{children}</main>
+      <footer className="bg-green-600 py-6 ">FOOTER DE TODAS LAS PAGS</footer>
+    </div>
   );
 }

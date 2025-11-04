@@ -5,7 +5,7 @@ import { HeaderProfile } from "./header-profile";
 export async function Header() {
 
     return (
-        <header className="bg-white shadow-sm">
+    <header className="bg-white shadow-sm relative z-50">
             <div className="container mx-auto px-6 py-4 flex items-center justify-between gap-4">
           
                 <div className="flex items-center gap-4">

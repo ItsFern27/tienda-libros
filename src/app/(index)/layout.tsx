@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <div>
       <Header/>
-      <main className="p-5">{children}</main>
+      <main>{children}</main>
       <footer className="bg-green-600 py-6 ">FOOTER DE TODAS LAS PAGS</footer>
     </div>
   );

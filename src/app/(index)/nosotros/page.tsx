@@ -4,7 +4,7 @@ export default function NosotrosPage() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-600 to-green-600 text-white py-16">
+      <div className="bg-linear-to-r from-green-600 to-green-600 text-white py-16">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Sobre Nosotros</h1>
           <p className="text-xl md:text-2xl text-green-100">
@@ -103,7 +103,7 @@ export default function NosotrosPage() {
 
         {/* Por qué elegirnos */}
         <section className="mb-16">
-          <div className="bg-gradient-to-r from-green-600 to-green-600 rounded-lg shadow-lg p-8 md:p-12 text-white">
+          <div className="bg-linear-to-r from-green-600 to-green-600 rounded-lg shadow-lg p-8 md:p-12 text-white">
             <h2 className="text-3xl font-bold mb-8 text-center">
               ¿Por qué elegir JH Libros?
             </h2>

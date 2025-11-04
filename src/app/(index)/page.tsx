@@ -3,8 +3,8 @@ Aqui se manda el contenido al layout
 */
 import Link from 'next/link'
 import { Carousel } from '../components/carousel/carousel';
-import { BookSlider } from '../components/card/book-slider';
-import { BookCard } from '../components/card/book';
+import { BookSlider } from '../components/book-components/book-slider';
+import { BookCard } from '../components/book-components/book';
 
 export default async function Home() {
   
@@ -19,7 +19,6 @@ export default async function Home() {
 
       <h2>Destacados</h2>
       <BookSlider/>
-      <BookCard titulo={"El Caballero Carmelo"}></BookCard>
     </div>
   );
 }

@@ -20,11 +20,11 @@ export function Footer() {
 
                 <div>
                     <h4 className="font-semibold text-white mb-2">Contacto</h4>
-                    <p className="text-gray-200">Correo: <a className="hover:text-green-600" href="mailto:contacto@jhlibros.com">contacto@jhlibros.com</a></p>
+                    <p className="text-gray-200">Correo: <a className="hover:text-sky-600" href="mailto:contacto@jhlibros.com">contacto@jhlibros.com</a></p>
                     <p className="text-gray-200 mt-2">Síguenos en redes</p>
                     <div className="flex gap-3 mt-2">
-                        <a className="text-gray-300 hover:text-green-600" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a>
-                        <a className="text-gray-300 hover:text-green-600" href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+                        <a className="text-gray-300 hover:text-sky-600" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a>
+                        <a className="text-gray-300 hover:text-sky-600" href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
                     </div>
                 </div>
             </div>

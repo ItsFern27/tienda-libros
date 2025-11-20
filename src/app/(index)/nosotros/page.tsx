@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NosotrosPage() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      {/* Hero Section */}
+
       <div className="bg-linear-to-r from-green-600 to-green-600 text-white py-16">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Sobre Nosotros</h1>
@@ -13,9 +13,9 @@ export default function NosotrosPage() {
         </div>
       </div>
 
-      {/* Main Content */}
+
       <div className="container mx-auto px-6 py-12">
-        {/* Historia */}
+ 
         <section className="mb-16">
           <div className="bg-white rounded-lg shadow-md p-8 md:p-12">
             <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">

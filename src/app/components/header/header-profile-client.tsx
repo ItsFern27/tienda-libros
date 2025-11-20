@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import Link from "next/link";
@@ -25,7 +24,6 @@ export default function ProfileMenu({ user }: Readonly<{ user: any }>) {
   }, [open]);
 
   const handleMouseEnter = () => {
-    // cancel any pending close
     if (closeTimer.current) {
       globalThis.clearTimeout(closeTimer.current);
       closeTimer.current = null;

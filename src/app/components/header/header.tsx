@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { HeaderProfile } from "./header-profile";
 import { SearchForm } from "../search/search-form";
 
-// Server component Header
+//componente header para todas las paginas
 export async function Header() {
 
     return (

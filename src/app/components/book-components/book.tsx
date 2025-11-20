@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
